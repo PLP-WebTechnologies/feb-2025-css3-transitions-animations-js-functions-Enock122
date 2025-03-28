@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Webpage</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            transition: background-color 0.5s ease-in-out;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Button Styling */
+        button {
+            padding: 10px 15px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+        }
+
+        /* Image Animation */
+        #animatedImage {
+            display: block;
+            margin: 20px auto;
+            width: 150px;
+            height: 150px;
+            transition: transform 1s ease-in-out;
+        }
+
+        /* Active Animation */
+        .animate {
+            transform: rotate(360deg) scale(1.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Customize Your Experience</h1>
+
+        <!-- Theme Selection -->
+        <label for="themeSelect">Choose Theme Color:</label>
+        <select id="themeSelect">
+            <option value="blue">Blue</option>
+            <option value="green">Green</option>
+            <option value="purple">Purple</option>
+        </select>
+        <button id="saveTheme">Save Theme</button>
+
+        <!-- Animated Image -->
+        <button id="animateButton">Animate Image</button>
+        <img id="animatedImage" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwGjw5etMMnZUPE_jVAgAQKb5_g0r4d4JrAw&s" alt="Placeholder Image">
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const themeSelect = document.getElementById("themeSelect");
+            const saveTheme = document.getElementById("saveTheme");
+            const animatedImage = document.getElementById("animatedImage");
+            const animateButton = document.getElementById("animateButton");
+
+            // Load saved theme from localStorage
+            const savedTheme = localStorage.getItem("themeColor");
+            if (savedTheme) {
+                document.body.style.backgroundColor = savedTheme;
+                themeSelect.value = savedTheme;
+            }
+
+            // Save selected theme to localStorage
+            saveTheme.addEventListener("click", function () {
+                const selectedColor = themeSelect.value;
+                localStorage.setItem("themeColor", selectedColor);
+                document.body.style.backgroundColor = selectedColor;
+            });
+
+            // Animate the image on button click
+            animateButton.addEventListener("click", function () {
+                animatedImage.classList.toggle("animate");
+            });
+        });
+    </script>
+
+</body>
+</html>
